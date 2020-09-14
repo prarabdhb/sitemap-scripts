@@ -61,7 +61,24 @@ const getAllMatches = async sportId => {
 	return matchData;
 };
 
+const letGoogleKnow = async sitemapUrl => {
+	let encoded_file_url = encodeURIComponent(file_url);
+	let ping_url = `http://www.google.com/ping?sitemap=${encoded_file_url}`;
+
+	const res = await fetch(ping_url, {
+		body: null,
+		method: "GET",
+		mode: "cors"
+	});
+
+	if (!res.ok) {
+		console.log("Letting Google Know Failed");
+	}
+	console.log("Letting Google Know Succeeded");
+};
+
 module.exports = {
 	getAllSports,
-	getAllMatches
+	getAllMatches,
+	letGoogleKnow
 };
